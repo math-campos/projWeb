@@ -36,13 +36,14 @@
                                              icon="pi pi-trash"
                                              title="Excluir"
                                              update="formListagem"
-                            onclick="if (!confirm('Confirma a exclusão?')) return false"/>                                                                         
+                                             onclick="if (!confirm('Confirma a exclusão?'))
+                                        return false"/>                                                                         
                         </div>                                                        
                     </p:column>
                 </p:dataTable>                
             </h:form>
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
-                modal="modal" width="50%" height="100%">
+                      modal="modal" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
                     <p:growl id="growl"/>
                     <div align="center">
@@ -60,6 +61,44 @@
                                 <f:selectItems value="#{controleMedico.daoEspecialidade.listaTodos}"
                                                var="esp" itemLabel="#{esp.descricao}"/>
                             </p:selectOneMenu>
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controlePaciente.objeto.id}"
+                                         size="5" readonly="true"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText id="txtNome"
+                                         value="#{controleMedico.objeto.nome}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>    
+                            <p:outputLabel value="Nascimento" for="txtNascimento"/>
+                            <p:calendar id="txtNascimento" value="#{controleMedico.objeto.nascimento}"
+                                        mask="true" pattern="dd/MM/yyyy" navigator="true" size="50">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar> 
+                            <p:outputLabel value="Telefone" for="txtTelefone"/>
+                            <p:inputText id="txtTelefone"
+                                         value="#{controleMedico.objeto.telefone}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>    
+                            <p:outputLabel value="Sexo" for="txtSexo"/>
+                            <p:inputText id="txtSexo"
+                                         value="#{controleMedico.objeto.sexo}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>     
+                            <p:outputLabel value="Historico" for="txtHistorico"/>
+                            <p:inputText id="txtHistorico"
+                                         value="#{controleMedico.objeto.historico}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>     
+                            <p:outputLabel value="Peso" for="txtPeso"/>
+                            <p:inputText id="txtPeso"
+                                         value="#{controleMedico.objeto.peso}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>   
+                            <p:outputLabel value="Altura" for="txtAltura"/>
+                            <p:inputText id="txtAltura"
+                                         value="#{controleMedico.objeto.altura}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>   
                         </p:panelGrid>
                     </div>
                     <p:panel>
@@ -67,7 +106,7 @@
                             <p:commandButton value="Salvar" icon="pi pi-save"
                                              actionListener="#{controleMedico.salvar()}"
                                              update="formEdicao formListagem"
-                            oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
+                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
                         </div>
                     </p:panel>
                 </h:form>    
