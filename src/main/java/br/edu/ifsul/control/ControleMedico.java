@@ -87,7 +87,7 @@ public class ControleMedico  implements Serializable {
         this.objeto = objeto;
     }
 
-    public EspecialidadeDAO<Especialidade> getDaoEstado() {
+    public EspecialidadeDAO<Especialidade> getDaoEspecialidade() {
         return daoEspecialidade;
     }
 

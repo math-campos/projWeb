@@ -47,9 +47,9 @@
                     <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
-                            <p:outputLabel value="CRM"/>
-                            <p:inputText value="#{controleMedico.objeto.crm}"
-                                         size="5" readonly="true"/>
+                            <p:outputLabel value="CRM"  for="txtCRM"/>
+                            <p:inputText id="txtCRM" value="#{controleMedico.objeto.crm}"
+                                         size="10" />
                             <p:outputLabel value="Especialidade" for="selectEspecialidade"/>
                             <p:selectOneMenu value="#{controleMedico.objeto.especialidade}"
                                              id="selectEspecialidade"
