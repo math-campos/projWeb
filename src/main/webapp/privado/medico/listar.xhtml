@@ -59,11 +59,37 @@
                 </div>                
                 <p:dataTable value="#{controleMedico.dao.listaObjetos}" var="obj"
                              id="listagem">
-                     <f:facet name="footer">
+                    <f:facet name="footer">
                         <div align="center">
                             <p:outputLabel value="#{controleMedico.dao.mensagemNavegacao}"/>
                         </div>
                     </f:facet>  
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{obj.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{obj.nome}"/>
+                    </p:column> 
+                    <p:column headerText="Nascimento">
+                        <p:outputLabel value="#{obj.nascimento}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel> 
+                    </p:column>
+                    <p:column headerText="Telefone">
+                        <p:outputLabel value="#{obj.telefone}"/>
+                    </p:column>   
+                    <p:column headerText="Sexo">
+                        <p:outputLabel value="#{obj.sexo}"/>
+                    </p:column>   
+                    <p:column headerText="Historico">
+                        <p:outputLabel value="#{obj.historico}"/>
+                    </p:column>   
+                    <p:column headerText="Peso">
+                        <p:outputLabel value="#{obj.peso}"/>
+                    </p:column>   
+                    <p:column headerText="Altura">
+                        <p:outputLabel value="#{obj.altura}"/>
+                    </p:column>   
                     <p:column headerText="CRM">
                         <p:outputLabel value="#{obj.crm}"/>
                     </p:column> 
@@ -83,7 +109,7 @@
                                              title="Excluir"
                                              update="formListagem"
                                              onclick="if (!confirm('Confirma a exclusão?'))
-                                        return false"/>                                                                         
+                                                         return false"/>                                                                         
                         </div>                                                        
                     </p:column>
                 </p:dataTable>                
@@ -94,6 +120,9 @@
                     <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controleMedico.objeto.id}"
+                                         size="5" readonly="true"/>
                             <p:outputLabel value="CRM"  for="txtCRM"/>
                             <p:inputText id="txtCRM" value="#{controleMedico.objeto.crm}"
                                          size="10" />
@@ -107,9 +136,6 @@
                                 <f:selectItems value="#{controleMedico.daoEspecialidade.listaTodos}"
                                                var="esp" itemLabel="#{esp.descricao}"/>
                             </p:selectOneMenu>
-                            <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controlePaciente.objeto.id}"
-                                         size="5" readonly="true"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText id="txtNome"
                                          value="#{controleMedico.objeto.nome}"
