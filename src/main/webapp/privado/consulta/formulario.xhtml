@@ -9,8 +9,6 @@
         <h:form id="formEdicao" prependId="false">
             <p:growl id="growl"/>
             <p:tabView id="tab">
-
-
                 <p:tab title="Dados Principais">
                     <div align="center">
                         <p:panelGrid columns="2">
@@ -69,6 +67,40 @@
                                   secure="false" height="200"/>
                 </p:tab>   
                 <p:tab title="Exames">
+                    <p:dataTable value="#{controleConsulta.objeto.exames}"
+                                 var="exame" rowIndexVar="idxExame"
+                                 id="listaExames">
+                        <f:facet name="header">
+                            <p:commandButton  value="Novo Exame"
+                                              actionListener="#{controleConsulta.novoExame()}"
+                                              update=":formExame"
+                                              icon="pi pi-plus"
+                                              process="@this"
+                                              oncomplete="PF('dlgExame').show();"/>                                              
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{exame.id}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{exame.nome}"/>
+                        </p:column> 
+                        <p:column headerText="Descrição">
+                            <p:outputLabel value="#{exame.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton icon="pi pi-pencil"
+                                             actionListener="#{controleConsulta.alterarExame(idxExame)}"
+                                             process="@this"
+                                             update=":formExame"
+                                             oncomplete="PF('dlgExame').show();"/>
+                            <p:commandButton icon="pi pi-trash"
+                                             actionListener="#{controleConsulta.removerExame(idxExame)}"
+                                             process="@this"
+                                             update="tab:listaExames growl"
+                                             onclick="if (!confirm('Confirma a exclusão do exame?'))
+                                                         return false"/>
+                        </p:column>
+                    </p:dataTable>
                 </p:tab>    
                 <p:tab title="Receituários">
                     <p:dataTable value="#{controleConsulta.objeto.receituarios}"
@@ -91,7 +123,7 @@
                         <p:column headerText="Validade">
                             <p:outputLabel id="txtValidade" 
                                            value="#{receituario.validade}">
-                                           <f:converter converterId="converterCalendar"/>  
+                                <f:converter converterId="converterCalendar"/>  
                             </p:outputLabel>
                         </p:column> 
                         <p:column headerText="Ações">
@@ -120,6 +152,29 @@
             </p:panel>
         </h:form>    
     </p:dialog>
+    <p:dialog header="Edição de Exame" widgetVar="dlgExame" resizable="false"
+              modal="true">
+        <h:form id="formExame">
+            <p:growl/>
+            <p:panelGrid columns="2">
+                <f:facet name="footer">
+                    <div align="center">
+                        <p:commandButton value="Salvar" icon="pi pi-save"
+                                         actionListener="#{controleConsulta.salvarExame()}"
+                                         update="tab:listaExames growl @form"
+                                         process="@form"
+                                         oncomplete="if(!args.validationFailed){PF('dlgExame').hide();}"/>
+                    </div>
+                </f:facet>
+                <p:outputLabel value="ID"/>
+                <p:inputText value="#{controleConsulta.exame.id}" readonly="true"/>
+                <p:outputLabel value="Nome"/>
+                <p:inputText value="#{controleConsulta.exame.nome}"/>
+                <p:outputLabel value="Descrição"/>
+                <p:inputText value="#{controleConsulta.exame.descricao}"/>                
+            </p:panelGrid>
+        </h:form>
+    </p:dialog>
     <p:dialog header="Edição de Receituário" widgetVar="dlgReceituario" resizable="false"
               modal="true">
         <h:form id="formReceituario">
@@ -138,7 +193,7 @@
                 <p:inputText value="#{controleConsulta.receituario.id}" readonly="true"/>
                 <p:outputLabel value="Posologia"/>
                 <p:textEditor value="#{controleConsulta.receituario.posologia}"
-                                  secure="false" height="200"/>
+                              secure="false" height="200"/>
                 <p:outputLabel value="Validade" for="txtValidade"/>
                 <p:calendar id="txtValidade"
                             value="#{controleConsulta.receituario.validade}"
@@ -148,7 +203,7 @@
                     <f:converter converterId="converterCalendar"/>
                 </p:calendar>      
             </p:panelGrid>
-        </h:form>        
+        </h:form>
     </p:dialog>
 </html>
 

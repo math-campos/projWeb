@@ -59,7 +59,7 @@
                 </div>                
                 <p:dataTable value="#{controleEspecialidade.dao.listaObjetos}" var="obj"
                              id="listagem">
-                     <f:facet name="footer">
+                    <f:facet name="footer">
                         <div align="center">
                             <p:outputLabel value="#{controleEspecialidade.dao.mensagemNavegacao}"/>
                         </div>
@@ -82,13 +82,15 @@
                                              icon="pi pi-trash"
                                              title="Excluir"
                                              update="formListagem"
-                            onclick="if (!confirm('Confirma a exclusão?')) return false"/>                                                                         
+                                             onclick="if (!confirm('Confirma a exclusão?'))
+                                                         return false"
+                                             rendered="#{p:ifGranted('ADMINISTRADOR')}"/>                                                                         
                         </div>                                                        
                     </p:column>
                 </p:dataTable>                
             </h:form>
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
-                modal="modal" width="50%" height="100%">
+                      modal="modal" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
                     <p:growl id="growl"/>
                     <div align="center">
@@ -108,7 +110,7 @@
                             <p:commandButton value="Salvar" icon="pi pi-save"
                                              actionListener="#{controleEspecialidade.salvar()}"
                                              update="formEdicao formListagem"
-                            oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
+                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
                         </div>
                     </p:panel>
                 </h:form>    

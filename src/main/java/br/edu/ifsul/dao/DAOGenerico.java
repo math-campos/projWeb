@@ -4,6 +4,7 @@ import br.edu.ifsul.converters.ConverterOrdem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @
  */
 public class DAOGenerico<TIPO> implements Serializable {
-    
+
     // consulta que será paginada
     private List<TIPO> listaObjetos;
     private List<TIPO> listaTodos;
@@ -28,12 +29,12 @@ public class DAOGenerico<TIPO> implements Serializable {
     protected Integer maximoObjetos = 5;
     protected Integer posicaoAtual = 0;
     protected Integer totalObjetos = 0;
-    
+
     public DAOGenerico(){
         
     }
-    
-     public List<TIPO> getListaObjetos() {
+
+    public List<TIPO> getListaObjetos() {
         String jpql = "from " + classePersistente.getSimpleName();
         String where = "";
         // removendo caracteres nocivos para tratar injeção de SQL
@@ -117,6 +118,7 @@ public class DAOGenerico<TIPO> implements Serializable {
         em.merge(obj);
     }    
     
+    @RolesAllowed("ADMINISTRADOR")
     public void remover(TIPO obj) throws Exception {
         obj = em.merge(obj);
         em.remove(obj);
@@ -153,100 +155,58 @@ public class DAOGenerico<TIPO> implements Serializable {
         this.classePersistente = classePersistente;
     }
 
-    /**
-     * @return the filtro
-     */
     public String getFiltro() {
         return filtro;
     }
 
-    /**
-     * @param filtro the filtro to set
-     */
     public void setFiltro(String filtro) {
         this.filtro = filtro;
     }
 
-    /**
-     * @return the listaOrdem
-     */
     public List<Ordem> getListaOrdem() {
         return listaOrdem;
     }
 
-    /**
-     * @param listaOrdem the listaOrdem to set
-     */
     public void setListaOrdem(List<Ordem> listaOrdem) {
         this.listaOrdem = listaOrdem;
     }
 
-    /**
-     * @return the ordemAtual
-     */
     public Ordem getOrdemAtual() {
         return ordemAtual;
     }
 
-    /**
-     * @param ordemAtual the ordemAtual to set
-     */
     public void setOrdemAtual(Ordem ordemAtual) {
         this.ordemAtual = ordemAtual;
     }
 
-    /**
-     * @return the converterOrdem
-     */
     public ConverterOrdem getConverterOrdem() {
         return converterOrdem;
     }
 
-    /**
-     * @param converterOrdem the converterOrdem to set
-     */
-    public void setConverterOrdem(ConverterOrdem converterOrdem) {
-        this.converterOrdem = converterOrdem;
+    public void setConverterOrdem(ConverterOrdem corverterOrdem) {
+        this.converterOrdem = corverterOrdem;
     }
 
-    /**
-     * @return the maximoObjetos
-     */
     public Integer getMaximoObjetos() {
         return maximoObjetos;
     }
 
-    /**
-     * @param maximoObjetos the maximoObjetos to set
-     */
     public void setMaximoObjetos(Integer maximoObjetos) {
         this.maximoObjetos = maximoObjetos;
     }
 
-    /**
-     * @return the posicaoAtual
-     */
     public Integer getPosicaoAtual() {
         return posicaoAtual;
     }
 
-    /**
-     * @param posicaoAtual the posicaoAtual to set
-     */
     public void setPosicaoAtual(Integer posicaoAtual) {
         this.posicaoAtual = posicaoAtual;
     }
 
-    /**
-     * @return the totalObjetos
-     */
     public Integer getTotalObjetos() {
         return totalObjetos;
     }
 
-    /**
-     * @param totalObjetos the totalObjetos to set
-     */
     public void setTotalObjetos(Integer totalObjetos) {
         this.totalObjetos = totalObjetos;
     }

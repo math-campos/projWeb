@@ -1,18 +1,21 @@
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="SistemaMedicoModelPU" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>jdbc/sistemamedico</jta-data-source>
-        <class>br.edu.ifsul.model.Consulta</class>
-        <class>br.edu.ifsul.model.Especialidade</class>
-        <class>br.edu.ifsul.model.Exame</class>
-        <class>br.edu.ifsul.model.Medicamento</class>
-        <class>br.edu.ifsul.model.Medico</class>
-        <class>br.edu.ifsul.model.Paciente</class>
-        <class>br.edu.ifsul.model.Receituario</class>
-        <properties>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
-        </properties>
-    </persistence-unit>
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="SistemaMedicoModelPU" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <jta-data-source>jdbc/sistemamedico</jta-data-source>
+    <class>br.edu.ifsul.model.Consulta</class>
+    <class>br.edu.ifsul.model.Especialidade</class>
+    <class>br.edu.ifsul.model.Exame</class>
+    <class>br.edu.ifsul.model.Medicamento</class>
+    <class>br.edu.ifsul.model.Medico</class>
+    <class>br.edu.ifsul.model.Paciente</class>
+    <class>br.edu.ifsul.model.Receituario</class>
+    <class>br.edu.ifsul.model.Permissao</class>
+    <class>br.edu.ifsul.model.Usuario</class>
+    <properties>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+      <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+    </properties>
+  </persistence-unit>
 </persistence>
